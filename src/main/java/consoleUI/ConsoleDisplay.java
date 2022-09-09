@@ -2,6 +2,8 @@ package consoleUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConsoleDisplay implements Displaying {
 	private static final int breaksFrequency = 8;
@@ -13,15 +15,12 @@ public class ConsoleDisplay implements Displaying {
 
 	}
 
-	
-
 	private String addBreaks(String baseString) {
-		ArrayList<String> words = new ArrayList<>(Arrays.asList(baseString.split(" ")));
+		List<String> words = new ArrayList<>(Arrays.asList(baseString.split(" ")));
 		if (words.size() <= breaksFrequency)
 			return baseString;
 
-		for (int i = 0; i < words.size(); i++)
-			words.set(i, words.get(i).concat(" "));
+		words = words.stream().map(n -> n + " ").collect(Collectors.toList());
 
 		for (int i = breaksFrequency; i < words.size(); i += breaksFrequency)
 			words.add(i, "\n");
@@ -31,5 +30,5 @@ public class ConsoleDisplay implements Displaying {
 
 		return strBuf.toString();
 	}
-	
-}	
+
+}
