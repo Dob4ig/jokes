@@ -3,29 +3,38 @@ package app;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+
 import consoleUI.ConsoleDisplay;
 import consoleUI.UserCommands;
 import jokes.RzhunemoguGetJoke;
 
 public class App {
+	private static final Logger log = Logger.getLogger(App.class);
 	private static final ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
 	public static void main(String[] args) {
+
+		log.info("Программа запущена");
 		var rzhuNeMoguJoke = new RzhunemoguGetJoke();
-
 		try (var scanner = new Scanner(System.in)) {
-			consoleDisplay.DisplayContent(rzhuNeMoguJoke.getJoke());
-
+			consoleDisplay.displayContent(rzhuNeMoguJoke.getJoke());
+			log.info("Первый вывод программы");
 			while (scanner.hasNext()) {
 				var input = scanner.next();
-
+				log.info(String.format("Получен пользовательский ввод input=%s", input));
 				if (input.equals(UserCommands.EXIT.command))
 					break;
-				if (input.equals(UserCommands.NEXT.command) || input.equals(UserCommands.SHORT_NEXT.command))
-					consoleDisplay.DisplayContent(rzhuNeMoguJoke.getJoke());
+				if (input.equals(UserCommands.NEXT.command) || input.equals(UserCommands.SHORT_NEXT.command)) {
+					consoleDisplay.displayContent(rzhuNeMoguJoke.getJoke());
+					log.info("Вывод в консоль");
+				}
 			}
+			log.info("Успешное завершение программы");
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getStackTrace());
+
 		}
 	}
 

@@ -1,5 +1,5 @@
 package consoleUI;
 
 public interface Displaying {
-	public void DisplayContent(String content);
+	public void displayContent(String content);
 }
