@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-
 import consoleUI.ConsoleDisplay;
 import consoleUI.UserCommands;
 import jokes.RzhunemoguGetJoke;
@@ -19,15 +18,17 @@ public class App {
 		log.info("Программа запущена");
 		var rzhuNeMoguJoke = new RzhunemoguGetJoke();
 		try (var scanner = new Scanner(System.in)) {
-			consoleDisplay.displayContent(rzhuNeMoguJoke.getJoke());
+			consoleDisplay.displayContent(rzhuNeMoguJoke.getJoke().getContent());
 			log.info("Первый вывод программы");
+			var joke = rzhuNeMoguJoke.getJoke();
 			while (scanner.hasNext()) {
 				var input = scanner.next();
 				log.info(String.format("Получен пользовательский ввод input=%s", input));
 				if (input.equals(UserCommands.EXIT.command))
 					break;
 				if (input.equals(UserCommands.NEXT.command) || input.equals(UserCommands.SHORT_NEXT.command)) {
-					consoleDisplay.displayContent(rzhuNeMoguJoke.getJoke());
+					consoleDisplay.displayContent(joke.getContent());
+					joke = rzhuNeMoguJoke.getJoke();
 					log.info("Вывод в консоль");
 				}
 			}

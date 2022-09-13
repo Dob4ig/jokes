@@ -12,11 +12,11 @@ public class RzhunemoguGetJoke extends JokesGetter {
 	private final String APIURL = "http://rzhunemogu.ru/RandJSON.aspx?CType=1";
 
 	@Override
-	public String getJoke() throws IOException {
+	public Joke getJoke() throws IOException {
 		var gson = new Gson();
 		try {
 			var joke = gson.fromJson(getResponse(), Joke.class);
-			return joke.content;
+			return joke;
 		} catch (JsonSyntaxException e) {
 
 			return getJoke();
@@ -36,8 +36,12 @@ public class RzhunemoguGetJoke extends JokesGetter {
 		}
 	}
 
-	private class Joke {
+	/*public class Joke {
 		private String content;
+		
+		public String getContent() {
+			return content;
+		}
 
-	}
+	}*/
 }
