@@ -17,6 +17,14 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<sourceDirectory> src/main/java</sourceDirectory>
@@ -32,8 +40,8 @@
 				<version>3.1</version>
 				<configuration>
 					<!-- Neo4j Procedures require Java 8 -->
-					<source>1.18</source>
-					<target>1.18</target>
+					<source>1.10</source>
+					<target>1.10</target>
 				</configuration>
 			</plugin>
 		</plugins>
